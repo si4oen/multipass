@@ -1,0 +1,13 @@
+## launch ubuntu server 20.04 LTS with specific resource and cloud-init
+## image name: focal, bionic --> use 'multipass find' to find correct image name
+
+multipass launch focal --cpus 2 --mem 2GB --disk 10G --name ubuntu --cloud-init .\cloud-init.yaml
+
+## multipass set command
+multipass set client.primary-name=ubuntu
+multipass set client.gui.autostart=false
+multipass set local.driver=virtualbox
+multipass set local.driver=hyperv
+
+## multipass shell command
+multipass shell 'name of instance'
