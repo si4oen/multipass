@@ -1,0 +1,18 @@
+#cloud-config
+  package_update: true
+  package_upgrade: true
+  packages:
+    - net-tools
+    - telnet
+    - traceroute
+    - unzip
+    - docker.io
+    - python3-pip
+  runcmd:
+    - pip3 install docker-compose
+    - usermod -aG docker ubuntu
+  locale: en_US.UTF-8
+  timezone: Asia/Ho_Chi_Minh
+  #ssh testlab.pub
+  ssh_authorized_keys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDnmGNNI10RDPSRUBQiOoqNLqTfv5iPLI5/nF/9JYMyHtxyisvWw6xE4ZJaIn1zfLTU4GXvC24DEVSj28IO3NwKf/zUEsqxfQSe/9bMPO+0uIC0njkIyMBU0pfC1z+zbe5dDjHXlTvl96isLEj4OgV2UOUobsinuKv3e1QM3ecGLs57/8EJ+PXqk/XxhjFuVZa4lQCHHCV5U5hn8h6DW+N2FCFM0c+zDsvQOv5ve2ZF06y4OclknZrBcHHXvjQjJqXscmwvbBwBdr9QyIJ/A1p/nrQDChMYvOespWMbyVPsHk8eO2PJPstO/KNPJyjFN0O6k/anOKBaUFEG4V17kbYRCla8VgkkBzGlC6AZU3QBCbjdLyqDz0BXa70+8WANCzMWjzXvcFSs1ABrQFoXiz0wuFsDbZ1JEiNGyFvg3t/zng5CHoCD1S+DfQA5peavj7AUiH8MrAxfC5kqXFm/v7e8ViVHHLVFopVykiV29NtM9iSvGOGv6oNOb4T5+WIEEsyy8EpZGV1tw97PK5kYA8E8z5MKOeOlJvtWPYWOYKc9zqt6+HAaqvlCYagCMD6oUWbXfsbQS/bAIyJEwmDQvaYOXD7qhypwmk8bROjukMEbUUgLfkyCdoHhDsSpb/JyXeuQztW4DUGiZuUfy9LsbVI1XUhs1i0Wt/8aBK0xlxhEGw== ubuntu@userver
