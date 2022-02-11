@@ -1,5 +1,6 @@
 ## launch ubuntu server 20.04 LTS with specific resource and cloud-init
 ## image name: focal, bionic --> use 'multipass find' to find correct image name
+## image location: C:\Windows\System32\config\systemprofile\AppData\Local\multipassd\cache\vault\images
 
 multipass launch focal --cpus 2 --mem 2GB --disk 10G --name ubuntu --cloud-init .\cloud-init.yaml
 
@@ -11,3 +12,18 @@ multipass set local.driver=hyperv
 
 ## multipass shell command
 multipass shell 'name of instance'
+
+## start multipass with virtualbox - https://multipass.run/docs/using-virtualbox-in-multipass-windows
+## Multipass runs as the System account, so to see the instances in VirtualBox, or through the VBoxManage command, you have to run those as that user via PsExec -s.
+## Download and unpack PSTools.zip in your Downloads folder, and in an administrative PowerShell, run:
+PS> & $env:USERPROFILE\Downloads\PSTools\PsExec.exe -s -i $env:VBOX_MSI_INSTALL_PATH\VirtualBox.exe
+PS> & C:\portable\sysinternals\PsExec.exe -s -i $env:VBOX_MSI_INSTALL_PATH\VirtualBox.exe
+
+## To list the instances on the command line:
+PS> & $env:USERPROFILE\Downloads\PSTools\PsExec.exe -s $env:VBOX_MSI_INSTALL_PATH\VBoxManage.exe list vms
+PS> & C:\portable\sysinternals\PsExec.exe -s $env:VBOX_MSI_INSTALL_PATH\VBoxManage.exe list vms
+
+## VirtualBox Port forwarding
+## To expose a service running inside the instance on your host, you can use VirtualBox’s port forwarding feature, for example:
+PS> & $env:USERPROFILE\Downloads\PSTools\PsExec.exe -s $env:VBOX_MSI_INSTALL_PATH\VBoxManage.exe controlvm "primary" natpf1 "myservice,tcp,,8080,,8081"
+PS> & C:\portable\sysinternals\PsExec.exe -s $env:VBOX_MSI_INSTALL_PATH\VBoxManage.exe controlvm "ubuntu" natpf1 "myservice,tcp,,8080,,8081"
